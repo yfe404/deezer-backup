@@ -15,7 +15,7 @@ First you need to create an app that will have access to your Deezer account.
 
 #+CAPTION: Form to create a new application on Deezer
 #+NAME:   fig:deezer_app_create_form
-[[./img/deezer_0.png][Create a new application]]
+[[./img/deezer_0.png]]
 
 *** Define environement variables
 
