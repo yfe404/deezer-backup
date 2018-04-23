@@ -11,7 +11,7 @@ First you need to create an app that will have access to your Deezer account.
 
 1. Go to [[https://developers.deezer.com/myapps][your Deezer app page]]
 2. Click the button "Create a new Application"
-3. Fill in the form as follow shown below.
+3. Fill in the form as follow shown below (Note: The name has no importance).
 
 #+CAPTION: Form to create a new application on Deezer
 #+NAME:   fig:deezer_app_create_form
