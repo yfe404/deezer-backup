@@ -10,7 +10,6 @@ and save as JSON file all your playlists.
 import os
 import time
 import webbrowser
-import logging
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
@@ -37,7 +36,6 @@ def save_all_playlists(token):
 
     for item_playlist in req.json()['data']:
         playlist = dict([('name', item_playlist['title']), ('songs', list())])
-        (playlist)
         tracklist = requests.get("{}&access_token={}".format(item_playlist['tracklist'], token))
         for title in tracklist.json()['data']:
             song = dict(
