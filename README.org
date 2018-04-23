@@ -1,0 +1,63 @@
+* Deezer Backup
+
+A Python script that exports all of your Deezer playlists. 
+
+
+** How to use 
+
+*** Create a Deezer app 
+
+First you need to create an app that will have access to your Deezer account. 
+
+1. Go to [[https://developers.deezer.com/myapps][your Deezer app page]]
+2. Click the button "Create a new Application"
+3. Fill in the form as follow shown below.
+
+#+CAPTION: Form to create a new application on Deezer
+#+NAME:   fig:deezer_app_create_form
+[[./img/deezer_0.png][Create a new application]]
+
+*** Define environement variables
+
+Once the Deezer application has been created you'll be able to see your =Application ID= and =Secret key= (see below).
+
+#+CAPTION: Deezer application informations
+#+NAME:   fig:deezer_app_infos
+[[./img/deezer_0.png][Application infos]]
+
+You'll need to declare two environement variables to use the script: 
+
+- =APP_ID=: should have the same value as the =Application ID= (see image above)
+- =APP_SECRET=: should have the same value as the =Secret Key= (see image above)
+
+
+Example: 
+
+#+BEGIN_SRC sh
+export APP_ID=277302
+export APP_SECRET=290XXXXXXXXXXXXXXXXXXXXXXX
+#+END_SRC
+
+*** Run Python script 
+
+Once the previous operations has been completed you can run the script =deezer-backup.py=
+
+#+BEGIN_SRC sh
+python deezer-backup.py
+#+END_SRC
+
+A web page will pop up asking for permissions to access your user data on the behalf of your app.
+Note: if you already have authorized your app the page will be blank. In both cases, wait until a pop up appears saying 
+that you can close the page. It might take a few minutes, be patient. Then go back to your console and quit the script (using =CTRL+C=). 
+
+You can find the backup of your playlists in this directory under the folder playlists_<TIMESTAMP>.
+
+Example: 
+
+#+BEGIN_SRC sh
+playlists_1524517907.135343/
+├── 0.json
+├── 1.json
+#+END_SRC
+
+Here we have 2 playlists saved. One file per playlist.
