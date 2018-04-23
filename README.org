@@ -23,7 +23,7 @@ Once the Deezer application has been created you'll be able to see your =Applica
 
 #+CAPTION: Deezer application informations
 #+NAME:   fig:deezer_app_infos
-[[./img/deezer_0.png][Application infos]]
+[[./img/deezer_1.png]]
 
 You'll need to declare two environement variables to use the script: 
 
