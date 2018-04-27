@@ -19,6 +19,35 @@ APP_ID = os.environ.get("APP_ID")
 APP_SECRET = os.environ.get("APP_SECRET")
 
 
+
+def get_playlist(token, playlist_id):
+    """
+    Use Deezer API to get a playlist from its id.
+    The only information returned about each playlist is the name and tracklist (a track is described
+    by the name of the artist/band, the name of the album and the title.
+
+    Args:
+        token (string): The token given by Deezer to authenticate requests
+        playlist_id (string): The id of the playlist to get
+
+    Returns:
+        A dictionary representing the playlist 
+    """
+    req = requests.get("https://api.deezer.com/playlist/{}&access_token={}".format(playlist_id, token))
+    playlist_item = req.json()
+    playlist = dict([('name', playlist_item['title']), ('songs', list())])
+    for title in playlist_item['tracks']['data']:
+        song = dict(
+            [
+                ('title', title['title']),
+                ('artist', title['artist']['name']),
+                ('album', title['album']['title'])
+            ]
+        )
+        playlist['songs'].append(song)
+
+    return playlist
+
 def save_all_playlists(token):
     """
     Use Deezer API to get all user playlists and save each one in its own file as JSON.
@@ -35,17 +64,9 @@ def save_all_playlists(token):
     playlists = list()
 
     for item_playlist in req.json()['data']:
-        playlist = dict([('name', item_playlist['title']), ('songs', list())])
-        tracklist = requests.get("{}&access_token={}".format(item_playlist['tracklist'], token))
-        for title in tracklist.json()['data']:
-            song = dict(
-                [
-                    ('title', title['title']),
-                    ('artist', title['artist']['name']),
-                    ('album', title['album']['title'])
-                ]
-            )
-            playlist['songs'].append(song)
+        playlist_id = item_playlist['id']
+        playlist = get_playlist(token, playlist_id)
+        
         playlists.append(playlist)
 
     directory = 'playlists_{}'.format(time.time())
